@@ -2,6 +2,7 @@
 
 import Hero from "./components/hero";
 import FlipClock from "./components/flip-clock";
+import EventsPic from "./components/eventsPic";
 import Link from "next/link";
 
 export default function Home() {
@@ -11,13 +12,16 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center">
         <FlipClock />
       </div>
-      <Link href="/register">
-        <img
-          src="/button.svg"
-          alt="Wizard Illustration"
-          className="mx-auto mt-16 md:w-[18vw] hover:scale-105 transition-transform duration-300 cursor-pointer"
-        />
-      </Link>
+      <div className="flex flex-col items-center justify-center mt-8">
+      <Link href="/register" className="inline-block">
+      <img
+        src="/button.svg"
+        alt="Wizard Illustration"
+        className="mx-auto mt-16 md:w-[18vw] hover:scale-105 transition-transform duration-300 cursor-pointer"
+      />
+    </Link>
+    </div>
+      <EventsPic />
     </div>
   );
 }
