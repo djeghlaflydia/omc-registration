@@ -1,42 +1,161 @@
 @import "tailwindcss";
+:root {
+    --perspective-value: 42rem;
+}
 
 @font-face {
-  font-family: "MagicSchoolOne";
-  src: url("/fonts/MagicSchoolOne.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "MagicSchoolOne";
+    src: url("/fonts/MagicSchoolOne.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cingur";
+    src: url("/fonts/Cingur.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 .magic-school {
-  font-family: "MagicSchoolOne";
+    font-family: "MagicSchoolOne";
+}
+
+.cingur {
+    font-family: "Cingur";
 }
 
 .page-background {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden; /* important si l'image dépasse */
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden; /* important si l'image dépasse */
 }
 
 .page-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/harryPotterBG.png");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: top center;
-  z-index: -2;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/harryPotterBG.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: top center;
+    z-index: -2;
 }
 
 .page-background::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: white; 
-  opacity: 0.8; /* 40% */
-  z-index: -1; /* couche au-dessus */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;
+    opacity: 0.8; /* 40% */
+    z-index: -1; /* couche au-dessus */
+}
+
+.clock-container {
+    position: relative;
+    width: 80%;
+    font-weight: 800;
+    font-family: var(--font-cingur);
+}
+
+.flip-clock {
+    display: flex;
+    position: relative;
+    width: 85px;
+    height: 100px;
+    font-weight: 400;
+    /*aspect-ratio: 1/1;*/
+    line-height: 110%;
+    color: rgba(255, 255, 255, 1);
+    font-size: 90px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px rgba(47, 55, 41, 1);
+    background: rgba(47, 55, 41, 1);
+}
+
+.flip-clock .digital:before,
+.flip-clock .digital:after {
+    content: "" attr(data-number) "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgba(47, 55, 41, 1);
+
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.flip-clock .digital:before {
+    top: 0;
+    bottom: 50%;
+    border-radius: 2rem 2rem 0 0;
+    border-bottom: solid 0.5px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.flip-clock .digital:after {
+    top: 50%;
+    bottom: 0;
+    border-radius: 0 0 2rem 2rem;
+    line-height: 0;
+    border-top: solid 0.5px rgba(0, 0, 0, 0.3);
+}
+
+.flip-clock.down .back:before,
+.flip-clock.down .front:after {
+    z-index: 1;
+}
+
+.flip-clock.down .back:after {
+    z-index: 2;
+    transform-origin: 50% 0;
+    transform: perspective(var(--perspective-value)) rotate(180deg);
+}
+
+.flip-clock.down .front:before {
+    z-index: 3;
+}
+
+.flip-clock.down.go .front:before,
+.flip-clock.down.go .back:after {
+    will-change: transform;
+}
+
+.flip-clock.down.go .front:before {
+    transform-origin: 50% 100%;
+    animation: frontFlipDown 0.6s ease-in-out both;
+    backface-visibility: hidden;
+}
+
+.flip-clock.down.go .back:after {
+    animation: backFlipDown 0.6s ease-in-out both;
+    backface-visibility: hidden;
+}
+
+@keyframes frontFlipDown {
+    0% {
+        transform: perspective(var(--perspective-value)) rotateX(0deg);
+    }
+    100% {
+        transform: perspective(var(--perspective-value)) rotateX(180deg);
+    }
+}
+
+@keyframes backFlipDown {
+    0% {
+        transform: perspective(var(--perspective-value)) rotateX(180deg);
+    }
+    100% {
+        transform: perspective(var(--perspective-value)) rotateX(0deg);
+    }
+}
+
+.flip-clock:not(.go) .front:before,
+.flip-clock:not(.go) .back:after {
+    will-change: auto;
 }
