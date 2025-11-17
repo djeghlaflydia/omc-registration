@@ -40,6 +40,7 @@
     background-size: 100% auto;
     background-position: top center;
     z-index: -2;
+    opacity: 0.2;
 }
 
 .page-background::after {
@@ -51,7 +52,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-color: white;
-    opacity: 0.8; /* 40% */
+    opacity: 0.4; /* 40% */
     z-index: -1; /* couche au-dessus */
 }
 
