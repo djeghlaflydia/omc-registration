@@ -23,10 +23,6 @@ export default function Home() {
       </div>
       <EventsPic />
 
-      <div className="flex flex-col items-center justify-center py-16">
-        <FlipClock />
-      </div>
-
       <div className="p-[50em]"></div>
     </div>
   );
