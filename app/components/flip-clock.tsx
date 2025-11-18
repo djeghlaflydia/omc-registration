@@ -156,11 +156,11 @@ export default function FlipClock() {
 
   return (
     <div
-      className="clock-container flex justify-center items-center gap-15"
+      className="clock-container flex justify-center items-center gap-5 md:gap-15"
       ref={containerRef}
     >
       <div className="flex flex-col justify-center items-center gap-5">
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-2">
           <div className="flip-clock down day-tens">
             <div className="digital front" data-number="0"></div>
             <div className="digital back" data-number="0"></div>
@@ -178,7 +178,7 @@ export default function FlipClock() {
       </div>
 
       <div className="flex flex-col justify-center items-center gap-5">
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-2">
           <div className="flip-clock down hour-tens">
             <div className="digital front" data-number="0"></div>
             <div className="digital back" data-number="0"></div>
@@ -196,7 +196,7 @@ export default function FlipClock() {
       </div>
 
       <div className="flex flex-col justify-center items-center gap-5">
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-2">
           <div className="flip-clock down minute-tens">
             <div className="digital front" data-number="0"></div>
             <div className="digital back" data-number="0"></div>

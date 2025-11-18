@@ -88,13 +88,13 @@ body {
 .flip-clock {
     display: flex;
     position: relative;
-    width: 85px;
-    height: 100px;
+    width: 45px;
+    height: 80px;
     font-weight: 400;
     /*aspect-ratio: 1/1;*/
     line-height: 110%;
     color: rgba(255, 255, 255, 1);
-    font-size: 90px;
+    font-size: 70px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 3px 3px 6px rgba(47, 55, 41, 1);
@@ -219,4 +219,12 @@ body {
     );
     pointer-events: none;
     z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .flip-clock {
+        width: 85px;
+        height: 100px;
+        font-size: 90px;
+    }
 }
