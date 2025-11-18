@@ -1,6 +1,7 @@
 @import "tailwindcss";
 :root {
     --perspective-value: 42rem;
+    font-family: var(--font-headland), sans-serif !important;
 }
 
 @font-face {

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import { Headland_One } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,10 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const headland = Headland_One({
+const headland = localFont({
+  src: "../public/fonts/headland-one-latin-400-normal.ttf",
   variable: "--font-headland",
-  subsets: ["latin"],
   weight: "400",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
@@ -28,16 +28,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${headland.variable} antialiased`}
-      >
+      <body className={`${headland.variable} antialiased`}>
         {children}
       </body>
     </html>
