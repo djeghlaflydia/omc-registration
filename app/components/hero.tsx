@@ -88,7 +88,7 @@ const Hero = () => {
           </li>
 
           {/* CONTACT (section dans home) */}
-          <li>
+          {/*<li>
             <Link
               href="/#contact"
               style={{
@@ -102,13 +102,15 @@ const Hero = () => {
             >
               Contact
             </Link>
-          </li>
+          </li>*/}
         </ul>
       </nav>
 
       {/* Dynamic Title and Description */}
       <div className="text-center flex-col flex justify-center items-center mt-10 pb-10">
-        <h1 className="md:text-7xl px-4 text-5xl text-[#2F3729] magic-school">{getTitle()}</h1>
+        <h1 className="md:text-7xl px-4 text-5xl text-[#2F3729] magic-school">
+          {getTitle()}
+        </h1>
         <p
           className="md:text-xl headland mt-4 max-w-xl text-center text-[#2F3729] px-4"
           style={{ fontFamily: "headland" }}
