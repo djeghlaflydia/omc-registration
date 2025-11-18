@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Headland_One } from "next/font/google";
 import "./globals.css";
+import FlipClock from "./components/flip-clock";
+import Hero from "./components/hero";
+import PageBackground from "./components/page-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +41,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${headland.variable} antialiased`}
       >
-        {children}
+        <PageBackground>
+          <Hero />
+          <div className="flex flex-col items-center justify-center">
+            <FlipClock />
+          </div>
+
+          {children}
+        </PageBackground>
       </body>
     </html>
   );

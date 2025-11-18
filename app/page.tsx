@@ -7,11 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="page-background">
-      <Hero />
-      <div className="flex flex-col items-center justify-center">
-        <FlipClock />
-      </div>
+    <div className="">
       <div className="flex flex-col items-center justify-center mt-8">
         <Link href="/register" className="inline-block">
           <img
