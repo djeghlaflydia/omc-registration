@@ -229,3 +229,25 @@ body {
         font-size: 90px;
     }
 }
+
+.scroll-container {
+  display: flex;
+  animation: scroll-left 30s linear infinite;
+  margin-top: 5.5rem;
+  margin-bottom: 3rem;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Translate by one image width so it loops seamlessly */
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover for better UX */
+.scroll-container:hover {
+  animation-play-state: paused;
+}

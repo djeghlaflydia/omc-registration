@@ -1,13 +1,22 @@
-import React from 'react';
 
 const EventsPic = () => {
   return (
     <div className="relative w-full flex justify-center">
-      <img
-        src="events.png"
-        alt="events"
-        className="md:w-[100vw] w-[200vw] max-w-none mx-auto mt-22 rotate-2 mb-12 -ml-2"
-      />
+      <div className="w-full overflow-hidden">
+        <div className="scroll-container">
+          <img
+            src="events.png"
+            alt="events"
+            className="md:w-[100vw] w-[200vw] max-w-none -ml-2"
+          />
+          {/* Duplicate image for seamless loop */}
+          <img
+            src="events.png"
+            alt="events"
+            className="md:w-[100vw] w-[200vw] max-w-none -ml-2"
+          />
+        </div>
+      </div>
 
       <img
         src="clock.png"
@@ -25,4 +34,3 @@ const EventsPic = () => {
 };
 
 export default EventsPic;
-
