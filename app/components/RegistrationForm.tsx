@@ -567,7 +567,7 @@ const RegistrationForm = () => {
                   {/* Team Selection */}
                   <div className="flex flex-col gap-4">
                     <h3 className="text-2xl md:text-3xl magic-school text-[#2F3729] mb-4">
-                      Which House Or Team(s) Would You Like To Join?*
+                      Which house or team(s) would you like to join?*
                     </h3>
 
                     <div className="flex flex-col gap-3 ml-4">
@@ -626,8 +626,8 @@ const RegistrationForm = () => {
                   {/* Experience Level */}
                   <div className="flex flex-col gap-4 mt-8">
                     <h3 className="text-2xl md:text-3xl magic-school text-[#2F3729] mb-2">
-                      Describe Your Experience With The Skills Required By The
-                      Chosen Teams*
+                      Describe your experience with the skills required by the
+                      chosen team*
                     </h3>
 
                     <div className="flex flex-col gap-3 ml-4">
@@ -684,7 +684,7 @@ const RegistrationForm = () => {
                       htmlFor="motivation"
                       className="text-2xl md:text-3xl magic-school text-[#2F3729]"
                     >
-                      What Motivates You To Join OpenMindsClub?* :
+                      What motivates you to join OpenMindsClub?* :
                     </label>
                     <textarea
                       id="motivation"

@@ -59,20 +59,20 @@ const Hero = () => {
             </Link>
           </li>
 
-          {/* DEPARTEMENT (section dans home) */}
+          {/* DEPARTMENT (section dans home) */}
           <li>
             <Link
-              href="/#departement"
+              href="/#department"
               style={{
                 color: getColor(
                   pathname === "/" &&
                     typeof window !== "undefined" &&
-                    window.location.hash === "#departement",
+                    window.location.hash === "#department",
                 ),
               }}
               className="transition-colors hover:opacity-80"
             >
-              Departement
+              Department
             </Link>
           </li>
 
