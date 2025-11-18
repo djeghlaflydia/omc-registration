@@ -20,8 +20,8 @@ export default function Home() {
         </Link>
       </div>
       <EventsPic />
-
-      <div className="p-[50em]"></div>
+      <Departement />
+      <Contact />
     </div>
   );
 }
