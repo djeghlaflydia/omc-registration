@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { Headland_One } from "next/font/google";
 import "./globals.css";
+import FlipClock from "./components/flip-clock";
+import Hero from "./components/hero";
+import PageBackground from "./components/page-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,11 +16,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const headland = localFont({
-  src: "../public/fonts/headland-one-latin-400-normal.ttf",
+const headland = Headland_One({
   variable: "--font-headland",
+  subsets: ["latin"],
   weight: "400",
-  style: "normal",
 });
 
 export const metadata: Metadata = {
@@ -28,11 +30,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={`${headland.variable} antialiased`}>
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${headland.variable} antialiased`}
+      >
+        <PageBackground>
+          <Hero />
+          <div className="flex flex-col items-center justify-center">
+            <FlipClock />
+          </div>
+
+          {children}
+        </PageBackground>
       </body>
     </html>
   );

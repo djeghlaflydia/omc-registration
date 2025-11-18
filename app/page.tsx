@@ -9,23 +9,19 @@ import Contact from "./components/contact";
 
 export default function Home() {
   return (
-    <div className="page-background">
-      <Hero />
-      <div className="flex flex-col items-center justify-center">
-        <FlipClock />
-      </div>
+    <div className="">
       <div className="flex flex-col items-center justify-center mt-8">
-      <Link href="/register" className="inline-block">
-      <img
-        src="/button.svg"
-        alt="Wizard Illustration"
-        className="mx-auto mt-16 md:w-[18vw] hover:scale-105 transition-transform duration-300 cursor-pointer"
-      />
-    </Link>
-    </div>
+        <Link href="/register" className="inline-block">
+          <img
+            src="/button.svg"
+            alt="Wizard Illustration"
+            className="mx-auto mt-16 md:w-[18vw] hover:scale-105 transition-transform duration-300 cursor-pointer"
+          />
+        </Link>
+      </div>
       <EventsPic />
-      <Departement />
-      <Contact/>
+
+      <div className="p-[50em]"></div>
     </div>
   );
 }
