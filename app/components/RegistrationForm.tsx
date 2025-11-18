@@ -549,7 +549,7 @@ const RegistrationForm = () => {
                   </div>
 
                   {/* Next Button */}
-                  <div className="flex justify-center mt-8 md:w-auto w-32">
+                  <div className="flex justify-center mt-8 md:w-auto">
                     <button
                       type="button"
                       className="cursor-pointer"
