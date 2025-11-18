@@ -16,7 +16,7 @@ export const registrationSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z
     .string()
-    .min(8, "Phone number must be at least 8 characters")
+    .min(9, "Phone number must be at least 9 characters")
     .max(15, "Phone number is too long"),
   fieldOfStudy: z
     .string()
@@ -61,7 +61,7 @@ export const step1Schema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z
     .string()
-    .min(8, "Phone number must be at least 8 characters")
+    .min(9, "Phone number must be at least 9 characters")
     .max(15, "Phone number is too long"),
   fieldOfStudy: z
     .string()
