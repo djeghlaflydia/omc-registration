@@ -10,8 +10,8 @@ export default function FlipClock() {
     const container = containerRef.current;
     if (!container) return;
 
-    // Target date: November 20th, 2025 at 8:00 PM
-    const targetDate = new Date("2025-11-20T20:00:00");
+    // Target date: November 23rd, 2025 at 8:00 PM Algeria Time (CET - UTC+1)
+    const targetDate = new Date("2025-11-23T20:00:00+01:00");
 
     const configs = [
       {
