@@ -7,44 +7,74 @@ const Hero = () => {
   const pathname = usePathname();
 
   // Fonction utilitaire : renvoie la bonne couleur
-  const getColor = (isActive: boolean) =>
-    isActive ? "#251e14" : "#4a4132";
+  const getColor = (isActive: boolean) => (isActive ? "#251e14" : "#4a4132");
+
+  // Get title based on pathname
+  const getTitle = () => {
+    switch (pathname) {
+      case "/":
+        return "The Call for New Wizards Begins!";
+      case "/register":
+        return "Join the Magic Circle!";
+      default:
+        return "Welcome to OMC!";
+    }
+  };
+
+  // Get description based on pathname
+  const getDescription = () => {
+    switch (pathname) {
+      case "/":
+        return (
+          <>
+            Step into a world where technology meets magic
+            <br />
+            Our mission to share knowledge, spark creativity, and bring students
+            together through open source and scientific events.
+          </>
+        );
+      case "/register":
+        return <></>;
+      default:
+        return "Empowering students through technology and collaboration.";
+    }
+  };
 
   return (
-    <div className="relative w-full ">
-      
+    <div className="w-full">
       {/* Image de fond */}
-      <img 
-        src="/header.svg" 
-        alt="header" 
-        className="w-full h-full object-cover"
-      />
+      <div className="absolute inset-0 w-full">
+        <img src="/header.svg" alt="header" className="w-full object-cover" />
+      </div>
 
-      {/* Navbar */}
-      <div className="absolute inset-0 mt-10">
-      <nav className="flex justify-center items-start">
+      <nav className="absolute inset-0 mt-10 flex justify-center items-start">
         <ul className="flex gap-16 text-2xl font-semibold">
-
           {/* HOME */}
           <li>
-            <a
+            <Link
               href="/"
               style={{ color: getColor(pathname === "/") }}
-              className="transition-colors"
+              className="transition-colors hover:opacity-80"
             >
               Home
-            </a>
+            </Link>
           </li>
 
           {/* DEPARTEMENT (section dans home) */}
           <li>
-            <a
+            <Link
               href="/#departement"
-              style={{ color: getColor(pathname === "/" && global?.location?.hash === "#departement") }}
-              className="transition-colors"
+              style={{
+                color: getColor(
+                  pathname === "/" &&
+                    typeof window !== "undefined" &&
+                    window.location.hash === "#departement",
+                ),
+              }}
+              className="transition-colors hover:opacity-80"
             >
               Departement
-            </a>
+            </Link>
           </li>
 
           {/* REGISTER (autre page) */}
@@ -52,7 +82,7 @@ const Hero = () => {
             <Link
               href="/register"
               style={{ color: getColor(pathname === "/register") }}
-              className="transition-colors"
+              className="transition-colors hover:opacity-80"
             >
               Register
             </Link>
@@ -60,29 +90,29 @@ const Hero = () => {
 
           {/* CONTACT (section dans home) */}
           <li>
-            <a
+            <Link
               href="/#contact"
-              style={{ color: getColor(pathname === "/" && global?.location?.hash === "#contact") }}
-              className="transition-colors"
+              style={{
+                color: getColor(
+                  pathname === "/" &&
+                    typeof window !== "undefined" &&
+                    window.location.hash === "#contact",
+                ),
+              }}
+              className="transition-colors hover:opacity-80"
             >
               Contact
-            </a>
+            </Link>
           </li>
-
         </ul>
       </nav>
-      {pathname !== "/register" && (
-        <div className="text-center flex-col flex justify-center items-center mt-20">
-          <h1 className="text-7xl text-[#2F3729] magic-school">
-            The Call for New Wizards Begins!
-          </h1>
-          <p className="text-2xl mt-6 max-w-2xl text-center text-[#2F3729]">
-            Step into a world where technology meets magic
-            <br />
-            Our mission to share knowledge, spark creativity, and bring students together through open source and scientific events.
-          </p>
-        </div>
-      )}
+
+      {/* Dynamic Title and Description */}
+      <div className="text-center flex-col flex justify-center items-center mt-40">
+        <h1 className="text-7xl text-[#2F3729] magic-school">{getTitle()}</h1>
+        <p className="text-2xl mt-6 max-w-2xl text-center text-[#2F3729]">
+          {getDescription()}
+        </p>
       </div>
     </div>
   );
