@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { registrationSchema } from "@/lib/validation";
+import { registrationSchema, step1Schema, step2Schema } from "@/lib/validation";
 
 interface FormData {
   firstName: string;
@@ -55,6 +55,20 @@ const RegistrationForm = () => {
       ...prev,
       [name]: value,
     }));
+
+    // Clear validation error for this field when user types
+    if (validationErrors[name]) {
+      setValidationErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+
+    // Clear submit error when user makes changes
+    if (submitError) {
+      setSubmitError("");
+    }
   };
 
   const handleTeamSelect = (team: string) => {
@@ -62,6 +76,20 @@ const RegistrationForm = () => {
       ...prev,
       selectedTeam: team,
     }));
+
+    // Clear validation error for selectedTeam when user selects
+    if (validationErrors.selectedTeam) {
+      setValidationErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.selectedTeam;
+        return newErrors;
+      });
+    }
+
+    // Clear submit error when user makes changes
+    if (submitError) {
+      setSubmitError("");
+    }
   };
 
   const handleExperienceSelect = (level: string) => {
@@ -69,13 +97,28 @@ const RegistrationForm = () => {
       ...prev,
       experienceLevel: level,
     }));
+
+    // Clear validation error for experienceLevel when user selects
+    if (validationErrors.experienceLevel) {
+      setValidationErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.experienceLevel;
+        return newErrors;
+      });
+    }
+
+    // Clear submit error when user makes changes
+    if (submitError) {
+      setSubmitError("");
+    }
   };
 
   const handleNext = () => {
     setValidationErrors({});
+    setSubmitError("");
 
     if (currentStep === 1) {
-      // Validate step 1 fields
+      // Validate step 1 fields using step1Schema
       const step1Data = {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -85,58 +128,51 @@ const RegistrationForm = () => {
         fieldOfStudy: formData.fieldOfStudy,
         faculty: formData.faculty,
         academicLevel: formData.academicLevel,
-        selectedTeam: "",
-        experienceLevel: "",
-        motivation: "",
-        expectation: "",
-        portfolio: "",
-        github: "",
       };
 
-      const result = registrationSchema.safeParse(step1Data);
+      const result = step1Schema.safeParse(step1Data);
       if (!result.success) {
         const errors: Record<string, string> = {};
         result.error.issues.forEach((err) => {
           const field = err.path[0] as string;
-          if (
-            step1Data.hasOwnProperty(field) &&
-            step1Data[field as keyof typeof step1Data] !== ""
-          ) {
-            errors[field] = err.message;
-          }
+          errors[field] = err.message;
         });
-
-        if (Object.keys(errors).length > 0) {
-          setValidationErrors(errors);
-          return;
-        }
+        setValidationErrors(errors);
+        setSubmitError("Please fix the errors above before continuing");
+        return;
       }
 
-      if (
-        formData.firstName &&
-        formData.lastName &&
-        formData.studentId &&
-        formData.email &&
-        formData.phone &&
-        formData.fieldOfStudy &&
-        formData.academicLevel
-      ) {
-        setCurrentStep(2);
-      } else {
-        alert("Please fill in all required fields");
-      }
+      // All validations passed, move to step 2
+      setCurrentStep(2);
     } else if (currentStep === 2) {
-      // Validate step 2 fields
-      if (
-        formData.selectedTeam &&
-        formData.experienceLevel &&
-        formData.motivation
-      ) {
-        setCurrentStep(3);
-      } else {
-        alert("Please fill in all required fields");
+      // Validate step 2 fields using step2Schema
+      const step2Data = {
+        selectedTeam: formData.selectedTeam,
+        experienceLevel: formData.experienceLevel,
+        motivation: formData.motivation,
+      };
+
+      const result = step2Schema.safeParse(step2Data);
+      if (!result.success) {
+        const errors: Record<string, string> = {};
+        result.error.issues.forEach((err) => {
+          const field = err.path[0] as string;
+          errors[field] = err.message;
+        });
+        setValidationErrors(errors);
+        setSubmitError("Please fix the errors above before continuing");
+        return;
       }
+
+      // All validations passed, move to step 3
+      setCurrentStep(3);
     }
+
+    // scroll to id registration-form
+    window.scrollTo({
+      top: document.getElementById("registration-form")?.offsetTop || 0,
+      behavior: "smooth",
+    });
   };
 
   const handleBack = () => {
@@ -162,6 +198,7 @@ const RegistrationForm = () => {
         const field = err.path[0] as string;
         errors[field] = err.message;
       });
+      console.log(errors);
       setValidationErrors(errors);
       setSubmitError("Please fix the validation errors before submitting");
       return;
@@ -217,7 +254,7 @@ const RegistrationForm = () => {
         });
         setCurrentStep(1);
         setSubmitSuccess(false);
-      }, 3000);
+      }, 30000);
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitError(
@@ -235,12 +272,12 @@ const RegistrationForm = () => {
           {/* Success Message */}
           {submitSuccess && (
             <div className="flex flex-col items-center justify-center p-10 gap-6">
-              <div className="text-5xl">🎉</div>
+              <div className="text-5xl"></div>
               <h2 className="text-4xl md:text-5xl magic-school text-[#2F3729] text-center">
                 Registration Successful!
               </h2>
               <p className="text-2xl magic-school text-[#2F3729] text-center">
-                Welcome to OpenMindsClub! We'll be in touch soon.
+                Welcome to OpenMindsClub! We&apos;ll reach out to you soon.
               </p>
             </div>
           )}
@@ -252,14 +289,6 @@ const RegistrationForm = () => {
               className="flex flex-col gap-8 md:p-10"
               id="registration-form"
             >
-              {/* Error Message */}
-              {submitError && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-                  <strong className="font-bold">Error: </strong>
-                  <span className="block sm:inline">{submitError}</span>
-                </div>
-              )}
-
               {/* Header with glasses icon */}
               <div className="flex flex-col items-center mb-8">
                 <img
@@ -587,6 +616,11 @@ const RegistrationForm = () => {
                         </label>
                       ))}
                     </div>
+                    {validationErrors.selectedTeam && (
+                      <p className="text-red-600 text-sm ml-4">
+                        {validationErrors.selectedTeam}
+                      </p>
+                    )}
                   </div>
 
                   {/* Experience Level */}
@@ -637,6 +671,11 @@ const RegistrationForm = () => {
                         </label>
                       ))}
                     </div>
+                    {validationErrors.experienceLevel && (
+                      <p className="text-red-600 text-sm ml-4">
+                        {validationErrors.experienceLevel}
+                      </p>
+                    )}
                   </div>
 
                   {/* Motivation */}
@@ -772,17 +811,21 @@ const RegistrationForm = () => {
                       className="cursor-pointer"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? (
-                        <div className="px-8 py-4 bg-gray-400 rounded-lg text-white magic-school text-2xl">
-                          Submitting...
-                        </div>
-                      ) : (
-                        <img src="/btn-send.svg" alt="Submit" />
-                      )}
+                      <img src="/btn-send.svg" alt="Submit" />
                     </button>
                   </div>
                 </>
               )}
+
+              {/* Error Message */}
+              <div className="mb-4">
+                {submitError && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    <strong className="font-bold">Error: </strong>
+                    <span className="block sm:inline">{submitError}</span>
+                  </div>
+                )}
+              </div>
             </form>
           )}
         </div>
