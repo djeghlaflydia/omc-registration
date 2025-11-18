@@ -4,6 +4,7 @@ import Hero from "./components/hero";
 import FlipClock from "./components/flip-clock";
 import EventsPic from "./components/eventsPic";
 import Link from "next/link";
+import Departement from "./components/departement"; 
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
     </Link>
     </div>
       <EventsPic />
+      <Departement />
     </div>
   );
 }
