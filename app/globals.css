@@ -62,7 +62,7 @@ html {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("/hogwarts.jpg");
+    background-image: url("/hogwarts.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: top center;
