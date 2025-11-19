@@ -286,9 +286,18 @@ const RegistrationForm = () => {
           {!submitSuccess && (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-8 md:p-10"
+              className="relative flex flex-col gap-8 py-10 md:px-10"
               id="registration-form"
             >
+              {/*feather pen*/}
+              <div>
+                <img
+                  src="/feather-pen.png"
+                  alt="Feather Pen Icon"
+                  className="absolute right-[-20%] bottom-[-2%] w-[80%]"
+                />
+              </div>
+
               {/* Header with glasses icon */}
               <div className="flex flex-col items-center mb-8">
                 <img
