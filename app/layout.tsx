@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "OpenMindsClub Registration",
     images: [
       {
-        url: "/thumbnail.png",
+        url: "https://join.openmindsclub.net/thumbnail.png",
         width: 821,
         height: 510,
         alt: "OpenMindsClub Registration - The Call for New Wizards Begins!",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OpenMindsClub Registration",
     description: "The Call for New Wizards Begins!",
-    images: ["/thumbnail.png"],
+    images: ["https://join.openmindsclub.net/thumbnail.png"],
   },
 };
 
